@@ -1,39 +1,9 @@
-# EFPS_system_front
-
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+# 以图搜图改良版byRWG
+## ⭐支持设置图源路径、图源数据库，便于公司各部门分管其图源⭐
+## ⭐支持对图源图片的删除⭐
+## ⭐支持对图源图片的批量加载和清除⭐
+# 前端项目部署
+### 1.在.env文件中设置你管理后端的api地址（EFPS_system_parent_forPIC）
+### 2.vite.config.ts设置部署的端口号（默认为8888）
+### 3.npm run install安装依赖
+### 4.npm run dev运行🍭
