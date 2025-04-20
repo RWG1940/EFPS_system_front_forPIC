@@ -2,6 +2,7 @@
   <t-header>
     <t-head-menu value="item1" height="120px">
       <template #logo>
+        <img src="../assets/img/seller.png" style="{ width: '80px', height: '80px' }" />
         <transition name="h-trans" appear>
           <h1 style="color: blue;">Seller-pic-sys</h1>
         </transition>
@@ -42,14 +43,27 @@ onBeforeMount(() => {
   opacity: 0;
   transform: perspective(1000px) translateX(-200px) scale(0.5);
 }
+
 .onlineCircle {
-  width: 1px;height: 1px;
-  display: inline-block; /* 确保 div 可以像文本一样显示 */
-  animation: fadeInOut 2s infinite; /* 设置动画名称、持续时间和循环次数 */
+  width: 1px;
+  height: 1px;
+  display: inline-block;
+  /* 确保 div 可以像文本一样显示 */
+  animation: fadeInOut 2s infinite;
+  /* 设置动画名称、持续时间和循环次数 */
 }
 
 @keyframes fadeInOut {
-  0%, 100% { opacity: 0.5;scale: 0.6; }
-  50% { opacity: 1;box-shadow: 1px 1px 5px rgb(155, 155, 155);scale: 0.7; }
-}
-</style>
+
+  0%,
+  100% {
+    opacity: 0.5;
+    scale: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+    box-shadow: 1px 1px 5px rgb(155, 155, 155);
+    scale: 0.7;
+  }
+}</style>
