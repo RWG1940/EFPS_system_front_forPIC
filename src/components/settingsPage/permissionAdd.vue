@@ -1,0 +1,80 @@
+<template>
+    <userEdit :visible="visible" header="添加权限" @update:visible="handleAddVisibleChange">
+        <template #main>
+            <el-scrollbar height="520px" style="margin-bottom: 10px;">
+                <t-form ref="form" :data="store.permissionAddFormData" :rules="store.PERMISSION_ADD_FORM_RULES" :label-width="0"
+                    @submit="handleAddFormSubmit" @reset="cancelButton">
+
+                    <t-form-item name="mName">
+                        <t-input-adornment prepend="权限名">
+                            <t-input v-model="store.permissionAddFormData.mName" clearable />
+                        </t-input-adornment>
+                    </t-form-item>
+                    <t-form-item name="mUrl">
+                        <t-input-adornment prepend="地址值">
+                            <t-input v-model="store.permissionAddFormData.mUrl" clearable />
+                        </t-input-adornment>
+                    </t-form-item>
+                    <t-form-item name="mSign">
+                        <t-input-adornment prepend="权限标志">
+                            <t-input v-model="store.permissionAddFormData.mSign" clearable />
+                        </t-input-adornment>
+                    </t-form-item>
+                   
+                </t-form>
+            </el-scrollbar>
+        </template>
+        <template #footer>
+            <t-button theme="primary" @click="submitBtn" block>提交</t-button>
+            <t-button theme="default" @click="resetBtn" block style="margin-left: 10px;">取消</t-button>
+        </template>
+    </userEdit>
+</template>
+<script lang="ts" setup>
+import userEdit from '../userManage/userEdit.vue';
+import { usePermissionStore } from '@/stores/permissions-store';
+import { ref } from 'vue';
+import type { FormInstanceFunctions, FormProps } from 'tdesign-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
+
+const form = ref<FormInstanceFunctions>();
+const store = usePermissionStore();
+const props = defineProps<{
+    visible: boolean;
+}>();
+//  通知父组件(table) 事件
+const emit = defineEmits(['update:visible', 'permissionAdded']);
+
+// visible更新后通知父组件 通知面板原本就能控制visible值
+const handleAddVisibleChange = () => {
+    emit('update:visible');
+};
+const cancelButton: FormProps['onReset'] = () => {
+    emit('update:visible')
+}
+// 提交用户数据
+const handleAddFormSubmit: FormProps['onSubmit'] = async ({ validateResult, firstError }) => {
+    if (validateResult === true) {
+        await store.addPermissions(store.permissionAddFormData).then(() => {
+            emit('permissionAdded')
+            form.value?.reset();
+        })
+    } else {
+        console.log('Validate Errors: ', firstError, validateResult);
+        if (firstError) {
+            MessagePlugin.warning(firstError);
+        } else {
+            MessagePlugin.warning('验证失败');
+        }
+    }
+};
+
+const submitBtn = () => {
+    form.value?.submit();
+}
+const resetBtn = () => {
+    form.value?.reset();
+}
+
+</script>
+<style scoped></style>
